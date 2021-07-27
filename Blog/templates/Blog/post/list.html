@@ -1,0 +1,36 @@
+
+{%	extends	"blog/base.html"	%}
+{%	load static	%}
+<link	href="{% static	'css/blog.css'	%}"	rel="stylesheet">
+{%	block	title	%}My	Blog{%	endblock	%}
+{%	block	content	%}
+<div class="row">
+	<div class="leftcolumn">
+	{%	for	post in	posts %}
+		  <div class="card">
+			<h2><a	href="{{post.get_absolute_url}}">
+				{{	post.title	}}
+				</a></h2>
+			<h5>Published	{{	post.publish	}}	by	{{	post.author	}}</h5>
+			{% if post.img%}
+			<img src = '{{ post.img.url }}' alt="...">
+			{% endif %}
+			<p>{{	post.body|truncatewords:30|linebreaks	}}</p>
+			
+		  </div>
+		  {%	endfor	%}
+		  <p></p>
+		  {% include "pagination.html" with page=page_obj %}
+	</div>
+		 
+	<div class="rightcolumn">
+			<div class="card">
+			  <h2>About Me</h2>
+			  <img class= 'viral' src = '{% static	"images/viral.jpg"	%}'>
+			  <p>Seeking a beginner role to enhance and explore my technical knowledge gained at Ganpat University in the last three years. I hold a B.Tech degree from U. V. Patel college of engineering and learned many skills held at the campus. Looking to start a career as an entry-level professional with a reputed IT company.</p>
+			</div>
+		  </div>
+		</div>
+		
+		  
+{%	endblock	%}
